@@ -1,0 +1,53 @@
+---
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+const ICP = '鲁ICP备2024111618号';
+---
+
+<SidebarPersister>
+	<SidebarSublist sublist={sidebar} />
+</SidebarPersister>
+
+<div class="xdc-icp xdc-icp-desktop">{ICP}</div>
+
+<div class="xdc-mobile-only">
+	<div class="xdc-mobile-foot">
+		<span class="xdc-icp xdc-icp-mobile">{ICP}</span>
+		<MobileMenuFooter />
+	</div>
+</div>
+
+<style>
+	.xdc-icp {
+		color: var(--sl-color-gray-3);
+		font-size: var(--sl-text-xs);
+		padding: 0.75rem 0.5rem;
+		text-align: center;
+		line-height: 1.4;
+		word-break: keep-all;
+		border-top: 1px solid var(--sl-color-gray-6);
+	}
+	.xdc-icp-desktop { margin-top: auto; display: block; }
+	.xdc-mobile-only { display: none; }
+	.xdc-mobile-foot {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+	.xdc-icp-mobile {
+		text-align: left;
+		padding: 0;
+		margin: 0;
+		border-top: none;
+	}
+
+	/* mobile: show only the mobile footer; desktop: only the desktop footer */
+	@media (max-width: 49.99rem) {
+		.xdc-icp-desktop { display: none; }
+		.xdc-mobile-only { display: block; }
+	}
+</style>
